@@ -28,25 +28,20 @@ type DSN struct {
 
 // [scheme://][username[:password]@][net[(addr)]]/a/b/c[?param1=value1&paramN=valueN]
 func Parse(dsn string) (*DSN, error) {
-
 	var (
 		err    error
 		scheme string
 		source string
 	)
-
 	if scheme, source, err = parseScheme(dsn); err != nil {
 		return nil, err
 	}
-
 	d := &DSN{
 		Scheme: scheme,
 	}
-
 	if err := parse(d, source); err != nil {
-		return d, nil
+		return nil, err
 	}
-
 	return d, nil
 }
 
